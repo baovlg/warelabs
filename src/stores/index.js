@@ -1,5 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from "@reduxjs/toolkit";
+import cartReducer from "./reduxs/reducers";
 
-export default configureStore({
-  reducer: {},
-})
+export const store = configureStore({
+  reducer: { cart: cartReducer },
+});

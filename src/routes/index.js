@@ -33,6 +33,7 @@ function RouteWithSubRoutes(route) {
           component={route.component}
           title={route.title}
           routes={route.routes}
+          hideSidebar={route.hideSidebar}
           {...props}
         />
       )}

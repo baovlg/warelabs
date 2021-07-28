@@ -1,15 +1,26 @@
-import { Route } from 'react-router-dom';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Route } from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Header from "../partials/Header";
+import Sidebar from "../partials/Sidebar";
 
-import Header from '../partials/Header';
-import Sidebar from '../partials/Sidebar';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+}));
 
-const AppDefault = ({ component: Component, ...rest }) => {
+const AppDefault = ({ hideSidebar, component: Component, ...rest }) => {
+  const classes = useStyles();
+
   return (
     <Route
       render={(props) => (
-        <div id="content--main">
+        <div className={classes.root}>
+          <CssBaseline />
           <Header />
-          <Sidebar />
+          {hideSidebar ?? <Sidebar />}
           <Component {...props} {...rest} />
         </div>
       )}
