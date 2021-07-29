@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { clean } from "../../stores/reducers/cart";
+import { addInform } from "../../stores/reducers/buyer";
 import Toolbar from "@material-ui/core/Toolbar";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -44,6 +45,7 @@ const Cart = () => {
   const handleSubmit = () => {
     if (name && email) {
       dispatch(clean());
+      dispatch(addInform({ name, email }));
       history.push("/order-confirm");
     }
   };
