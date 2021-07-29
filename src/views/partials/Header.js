@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -13,32 +12,15 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Badge from "@material-ui/core/Badge";
-
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: "cadetblue",
-  },
-  title: {
-    flexGrow: 1,
-    fontSize: 18,
-  },
-  brand: {
-    display: "inline-block",
-    padding: 5,
-    borderStyle: "solid",
-    borderColor: "white",
-    borderRadius: 15,
-  },
-  paper: {
-    marginRight: theme.spacing(2),
-  },
-}));
+import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+  const cart = useSelector((state) => state.cart);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -48,7 +30,6 @@ const Header = () => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
 
@@ -69,14 +50,26 @@ const Header = () => {
     prevOpen.current = open;
   }, [open]);
 
+  let history = useHistory();
+
+  const goToCart = () => {
+    history.push("/cart");
+  };
+
+  const goToHome = () => {
+    history.push("/");
+  };
+
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          <div className={classes.brand}>WAVELABS</div>
+          <div className={classes.brand} onClick={goToHome}>
+            WAVELABS
+          </div>
         </Typography>
-        <Badge badgeContent={4} color="primary">
-          <ShoppingCartIcon />
+        <Badge badgeContent={cart.length} color="primary" onClick={goToCart}>
+          <ShoppingCartIcon className={classes.shoppingCartIcon} />
         </Badge>
         <Button
           ref={anchorRef}
@@ -120,4 +113,32 @@ const Header = () => {
     </AppBar>
   );
 };
+
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: "cadetblue",
+  },
+  title: {
+    flexGrow: 1,
+    fontSize: 18,
+  },
+  brand: {
+    display: "inline-block",
+    padding: 5,
+    borderStyle: "solid",
+    borderColor: "white",
+    borderRadius: 15,
+    color: "#fff",
+    cursor: "pointer",
+  },
+  paper: {
+    marginRight: theme.spacing(2),
+  },
+  shoppingCartIcon: {
+    color: "#fff",
+    cursor: "pointer",
+  },
+}));
+
 export default Header;
