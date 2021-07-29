@@ -64,7 +64,7 @@ const Cart = () => {
   return (
     <main className={classes.root}>
       <Toolbar />
-      <Grid container spacing={3}>
+      <Grid className={classes.gridContainer} container spacing={3}>
         <Grid item xs={7}>
           <Paper className={classes.paper}>
             <Typography
@@ -148,6 +148,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     padding: theme.spacing(9),
+  },
+  gridContainer: {
+    justifyContent: "space-between",
   },
   paper: {
     padding: "20px",
