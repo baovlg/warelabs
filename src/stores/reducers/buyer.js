@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const buyerSlice = createSlice({
   name: "buyer",
-  initialState: { name: "", email: "" },
+  initialState: [],
   reducers: {
     addInform: (state, { payload }) => {
-      state = payload;
+      state.push(payload);
     },
   },
 });

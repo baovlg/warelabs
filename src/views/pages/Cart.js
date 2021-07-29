@@ -33,8 +33,11 @@ const Cart = () => {
     setTotal(sumValues);
   }, [cart]);
 
+  const pattern =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   useEffect(() => {
-    if (name !== "" && email !== "") {
+    if (name !== "" && email !== "" && pattern.test(email)) {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -55,11 +58,7 @@ const Cart = () => {
   };
 
   const handleChangeEmail = (event) => {
-    let pattern =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (event.target.value !== "" || pattern.test(event.target.value)) {
-      setEmail(event.target.value);
-    }
+    setEmail(event.target.value);
   };
 
   return (
@@ -124,11 +123,11 @@ const Cart = () => {
                 type="email"
                 onChange={handleChangeEmail}
                 required
+                error={email !== "" && !pattern.test(email)}
               />
 
               <Button
                 className={classes.contactButton}
-                type="submit"
                 variant="contained"
                 size="large"
                 color="primary"

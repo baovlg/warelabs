@@ -14,11 +14,7 @@ function feedProduct(listCategory, length = 6) {
         quantity: 10,
         price: 1000,
         image:
-          "/images/products/" +
-          category.name.toLowerCase() +
-          "_" +
-          index +
-          ".jpg",
+          "/images/products/" + category.name.toLowerCase() + "_" + 1 + ".jpg",
       };
       listProduct.push(product);
     }

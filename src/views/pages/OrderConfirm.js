@@ -8,14 +8,14 @@ import Paper from "@material-ui/core/Paper";
 const OrderConfirm = () => {
   const classes = useStyles();
   const buyer = useSelector((state) => state.buyer);
-  console.log({ buyer });
+
   return (
     <div className={classes.root}>
       <Toolbar />
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <h1>Thank you for Confirming the Order {buyer.name}</h1>
+            <h1>Thank you for Confirming the Order {buyer[0]?.name}</h1>
           </Paper>
         </Grid>
       </Grid>
